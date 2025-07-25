@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="Raeed.jpg" type="image/jpeg" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>😎 The World of Raeed 😎</title>
+  <style>
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+      background: linear-gradient(-45deg, #000428, #004e92, #1f1c2c, #928dab);
+      background-size: 400% 400%;
+      animation: smoothShift 20s ease infinite;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    @keyframes smoothShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(255, 255, 255, 0.25);
+      padding: 30px 40px;
+      max-width: 1000px;
+      margin: 30px auto;
+    }
+
+    .login-screen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(-45deg, #000428, #004e92, #1f1c2c, #928dab);
+      background-size: 400% 400%;
+      animation: smoothShift 20s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .login-box {
+      width: 350px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(25px);
+      border-radius: 20px;
+      padding: 35px 30px;
+      box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3);
+      text-align: center;
+      color: #fff;
+    }
+
+    .login-box h2 {
+      font-size: 2em;
+      margin-bottom: 25px;
+      background: linear-gradient(to right, #f9d423, #ff4e50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1em;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      outline: none;
+      transition: background 0.3s ease;
+    }
+
+    .login-box input::placeholder {
+      color: #ddd;
+    }
+
+    .login-box input:focus {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(to right, #f9d423, #ff4e50);
+      font-weight: bold;
+      font-size: 1.1em;
+      color: #000;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 0 15px rgba(249, 212, 35, 0.7);
+    }
+
+    .login-box button:hover {
+      background: linear-gradient(to right, #ff4e50, #f9d423);
+      transform: scale(1.05);
+    }
+
+    header {
+      display: none;
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 3.5em;
+      background: linear-gradient(to right, #f9d423, #ff4e50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+    }
+
+    nav {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    nav button {
+      background: linear-gradient(to right, #f9d423, #ff4e50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 14px 25px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      font-size: 1.1em;
+      transition: all 0.4s ease;
+      user-select: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    nav button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 30%, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.15));
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    nav button:hover::before,
+    nav button.active::before {
+      opacity: 1;
+    }
+
+    nav button:hover,
+    nav button.active {
+      transform: scale(1.1);
+    }
+
+    .section {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      max-width: 1000px;
+      margin: 0 auto 50px auto;
+      line-height: 1.6;
+      font-size: 1.15em;
+    }
+
+    .section.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .section h2 {
+      font-size: 2em;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, #f9d423, #ff4e50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      font-weight: bold;
+    }
+
+    footer {
+      display: none;
+      text-align: center;
+      font-size: 1em;
+      color: #c3f5ff;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 25px 0 40px 0;
+      user-select: none;
+    }
+
+    footer a {
+      color: #ffe98a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    #audio-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(15px);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 24px;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+
+    #audio-control:hover {
+      background: rgba(255,255,255,0.3);
+      color: #000;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div class="login-screen">
+    <div class="login-box glass">
+      <h2>Login</h2>
+      <input type="text" id="username" placeholder="Username" autocomplete="off" />
+      <input type="password" id="password" placeholder="Password" autocomplete="off" />
+      <button onclick="login()">Enter</button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Welcome to Raeed's World 😎</h1>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <button onclick="showSection('about')" id="tab-about">About Me</button>
+    <button onclick="showSection('iitm')" id="tab-iitm">IITM BS Data Science</button>
+    <button onclick="showSection('ekascloud')" id="tab-ekascloud">EkasCloud & AWS</button>
+    <button onclick="showSection('health')" id="tab-health">Health & Lifestyle</button>
+  </nav>
+
+  <!-- SECTIONS -->
+  <section id="about" class="section glass">
+    <h2>About Me</h2>
+    <p>Raeed is an ambitious, highly motivated learner currently pursuing a dual academic path — studying Information Technology at SSN College of Engineering and also enrolled in the BS in Data Science and Applications at IIT Madras. With a strong foundation in core academic areas, he is deeply curious about how technology and data shape the world.</p>
+    <p>He balances intense academic work with recreational interests such as reading science fiction, diving into tech blogs, and gaming to unwind. Raeed is passionate about learning how things work and thrives in structured learning environments that offer freedom to explore.</p>
+    <p>Whether it’s building Python apps, understanding cloud infrastructure, or sharpening his mathematical reasoning, Raeed brings focus and persistence. He aims to evolve into a thoughtful engineer and data scientist who contributes with both skill and vision.</p>
+  </section>
+
+  <section id="iitm" class="section glass">
+    <h2>IITM BS Data Science</h2>
+    <p>This innovative program from IIT Madras empowers students to master data-driven decision making. Designed to be flexible and modular, it has three stages: Foundation, Diploma, and Degree. Raeed has completed several foundational subjects such as English I, Statistics I, Mathematics for Data Science, Computational Thinking, and Python Programming.</p>
+    <p>Each course combines real-world applications with strong theoretical grounding. The curriculum trains students to build and analyze datasets, think algorithmically, and apply statistical tools to uncover patterns and insights. Weekly quizzes, graded programming assignments, and proctored exams ensure rigorous learning.</p>
+    <p>Raeed actively participates in discussion forums, maintains a study calendar, and strives to complete each week’s content ahead of time. His goal is to finish the Foundation level with a strong GPA and move confidently into the Diploma phase where applications of data science begin.</p>
+  </section>
+
+  <section id="ekascloud" class="section glass">
+    <h2>EkasCloud & AWS</h2>
+    <p>Guided by EkasCloud, Raeed is learning the fundamentals of Amazon Web Services (AWS) and how cloud infrastructure powers the modern internet. He is gaining hands-on experience with EC2—Amazon’s Elastic Compute Cloud service—which enables users to launch, configure, and monitor virtual machines.</p>
+    <p>In this journey, Raeed has worked with Linux and Windows EC2 instances, practiced using key pairs and security groups, and explored concepts such as availability zones, instance types, and EBS volumes. He is also exploring how IAM (Identity & Access Management) is used to control access to AWS services securely.</p>
+    <p>These practical lessons complement his programming skills and are shaping him into a cloud-literate developer. Soon, Raeed plans to explore services like S3, Lambda, and RDS to understand the broader AWS ecosystem and build deployable, scalable applications.</p>
+  </section>
+
+  <section id="health" class="section glass">
+    <h2>Health & Lifestyle</h2>
+    <p>With a slender frame and mild myopia (-5D), Raeed is taking steps to enhance both his physical health and mental focus. He follows a self-designed wellness routine that includes eye exercises, walks in natural light, and nutrient-rich meals to support better weight and visual health.</p>
+    <p>Staying mostly indoors, he is mindful of the need to move regularly, break screen time with short outdoor activities within his apartment complex, and sleep on time (11 PM). Waking up around 9 AM, Raeed aims to gradually shift to an earlier schedule as part of optimizing energy and productivity.</p>
+    <p>Health is not an afterthought—it’s integrated into Raeed’s vision of being at his best, mentally sharp and physically ready to take on the demanding journey of becoming a capable engineer and data scientist. He aspires to build endurance, mindfulness, and long-term habits for growth.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    📧 <a href="mailto:hello@gmail.com">hello@gmail.com</a> &nbsp; | &nbsp; 📱 <a href="tel:+919999999999">+91 99999 99999</a><br><br>
+    <em>🌟 Keep going. Your future self will thank you.</em>
+  </footer>
+
+  <!-- AUDIO -->
+  <audio id="bgmusic" src="background.mp3" loop></audio>
+  <audio id="clicksound" src="click.mp3"></audio>
+  <audio id="errorSound" src="error.mp3"></audio>
+
+  <!-- AUDIO CONTROL -->
+  <button id="audio-control" title="Play/Pause Music">&#9658;</button>
+
+  <script>
+    const loginScreen = document.querySelector('.login-screen');
+    const header = document.querySelector('header');
+    const nav = document.querySelector('nav');
+    const footer = document.querySelector('footer');
+    const sections = document.querySelectorAll('.section');
+    const tabs = document.querySelectorAll('nav button');
+
+    const bgmusic = document.getElementById('bgmusic');
+    const clicksound = document.getElementById('clicksound');
+    const errorSound = document.getElementById('errorSound');
+    const audioControl = document.getElementById('audio-control');
+
+    let currentSection = null;
+
+    function login() {
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+
+      if (user === 'Raeed' && pass === 'Raeed2008Anees') {
+        clicksound.play();
+        loginScreen.style.display = 'none';
+        header.style.display = 'block';
+        nav.style.display = 'flex';
+        footer.style.display = 'block';
+        audioControl.style.display = 'flex';
+        showSection('about');
+        bgmusic.volume = 0.3;
+        bgmusic.play().catch(() => {
+          console.log('Autoplay blocked; use button to play.');
+        });
+      } else {
+        errorSound.play();
+        alert('❌ Incorrect credentials! Try again.');
+      }
+    }
+
+    function showSection(id) {
+      if (currentSection === id) return;
+      clicksound.play();
+      const newSection = document.getElementById(id);
+      if (!newSection) return;
+
+      tabs.forEach(btn => btn.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+
+      if (currentSection) {
+        const oldSection = document.getElementById(currentSection);
+        oldSection.style.opacity = 0;
+        setTimeout(() => {
+          oldSection.classList.remove('active');
+          newSection.classList.add('active');
+          newSection.style.opacity = 0;
+          setTimeout(() => {
+            newSection.style.opacity = 1;
+          }, 20);
+        }, 500);
+      } else {
+        newSection.classList.add('active');
+        newSection.style.opacity = 0;
+        setTimeout(() => {
+          newSection.style.opacity = 1;
+        }, 20);
+      }
+
+      currentSection = id;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    let musicPlaying = true;
+    audioControl.addEventListener('click', () => {
+      if (musicPlaying) {
+        bgmusic.pause();
+        audioControl.innerHTML = '&#9658;';
+      } else {
+        bgmusic.play();
+        audioControl.innerHTML = '&#10073;&#10073;';
+      }
+      musicPlaying = !musicPlaying;
+    });
+
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('keydown', e => {
+        if (e.key === 'Enter') clicksound.play();
+      });
+    });
+  </script>
+
+</body>
+</html>
